@@ -1,0 +1,21 @@
+{
+  "name": "shaka-module-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "circos": "^2.1.0",
+    "colors": "^1.4.0",
+    "line-reader": "^0.4.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

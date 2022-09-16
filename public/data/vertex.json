@@ -1,0 +1,956 @@
+[
+    {
+        "id": 0,
+        "name": "Shaka"
+    },
+    {
+        "id": 1,
+        "name": "shaka.abr.Ewma",
+        "parent": 0
+    },
+    {
+        "id": 2,
+        "name": "goog.asserts",
+        "parent": 0
+    },
+    {
+        "id": 3,
+        "name": "shaka.abr.EwmaBandwidthEstimator",
+        "parent": 0
+    },
+    {
+        "id": 4,
+        "name": "shaka.abr.SimpleAbrManager",
+        "parent": 0
+    },
+    {
+        "id": 5,
+        "name": "shaka.log",
+        "parent": 0
+    },
+    {
+        "id": 6,
+        "name": "shaka.util.StreamUtils",
+        "parent": 0
+    },
+    {
+        "id": 7,
+        "name": "shaka.ads.AdManager",
+        "parent": 0
+    },
+    {
+        "id": 8,
+        "name": "shaka.Player",
+        "parent": 0
+    },
+    {
+        "id": 9,
+        "name": "shaka.ads.AdsStats",
+        "parent": 0
+    },
+    {
+        "id": 10,
+        "name": "shaka.ads.ClientSideAdManager",
+        "parent": 0
+    },
+    {
+        "id": 11,
+        "name": "shaka.ads.ServerSideAdManager",
+        "parent": 0
+    },
+    {
+        "id": 12,
+        "name": "shaka.util.Error",
+        "parent": 0
+    },
+    {
+        "id": 13,
+        "name": "shaka.util.FakeEvent",
+        "parent": 0
+    },
+    {
+        "id": 14,
+        "name": "shaka.util.FakeEventTarget",
+        "parent": 0
+    },
+    {
+        "id": 15,
+        "name": "shaka.util.IReleasable",
+        "parent": 0
+    },
+    {
+        "id": 16,
+        "name": "shaka.ads.ClientSideAd",
+        "parent": 0
+    },
+    {
+        "id": 17,
+        "name": "shaka.util.EventManager",
+        "parent": 0
+    },
+    {
+        "id": 18,
+        "name": "shaka.ads.ServerSideAd",
+        "parent": 0
+    },
+    {
+        "id": 19,
+        "name": "shaka.cast.CastProxy",
+        "parent": 0
+    },
+    {
+        "id": 20,
+        "name": "shaka.cast.CastSender",
+        "parent": 0
+    },
+    {
+        "id": 21,
+        "name": "shaka.cast.CastUtils",
+        "parent": 0
+    },
+    {
+        "id": 22,
+        "name": "shaka.util.IDestroyable",
+        "parent": 0
+    },
+    {
+        "id": 23,
+        "name": "shaka.cast.CastReceiver",
+        "parent": 0
+    },
+    {
+        "id": 24,
+        "name": "shaka.util.Platform",
+        "parent": 0
+    },
+    {
+        "id": 25,
+        "name": "shaka.util.Timer",
+        "parent": 0
+    },
+    {
+        "id": 26,
+        "name": "shaka.util.PublicPromise",
+        "parent": 0
+    },
+    {
+        "id": 27,
+        "name": "shaka.media.TimeRangesUtils",
+        "parent": 0
+    },
+    {
+        "id": 28,
+        "name": "shaka.cea.Cea608DataChannel",
+        "parent": 0
+    },
+    {
+        "id": 29,
+        "name": "shaka.cea.Cea608Memory",
+        "parent": 0
+    },
+    {
+        "id": 30,
+        "name": "shaka.cea.CeaUtils",
+        "parent": 0
+    },
+    {
+        "id": 31,
+        "name": "shaka.text.Cue",
+        "parent": 0
+    },
+    {
+        "id": 32,
+        "name": "shaka.cea.Cea708Service",
+        "parent": 0
+    },
+    {
+        "id": 33,
+        "name": "shaka.cea.Cea708Window",
+        "parent": 0
+    },
+    {
+        "id": 34,
+        "name": "shaka.cea.DtvccPacket",
+        "parent": 0
+    },
+    {
+        "id": 35,
+        "name": "shaka.cea.ICaptionDecoder",
+        "parent": 0
+    },
+    {
+        "id": 36,
+        "name": "shaka.cea.CeaUtils.StyledChar",
+        "parent": 0
+    },
+    {
+        "id": 37,
+        "name": "shaka.util.Functional",
+        "parent": 0
+    },
+    {
+        "id": 38,
+        "name": "shaka.cea.CeaDecoder",
+        "parent": 0
+    },
+    {
+        "id": 39,
+        "name": "shaka.cea.DtvccPacketBuilder",
+        "parent": 0
+    },
+    {
+        "id": 40,
+        "name": "shaka.util.DataViewReader",
+        "parent": 0
+    },
+    {
+        "id": 41,
+        "name": "shaka.cea.ICeaParser",
+        "parent": 0
+    },
+    {
+        "id": 42,
+        "name": "shaka.cea.Mp4CeaParser",
+        "parent": 0
+    },
+    {
+        "id": 43,
+        "name": "shaka.cea.SeiProcessor",
+        "parent": 0
+    },
+    {
+        "id": 44,
+        "name": "shaka.util.Mp4Parser",
+        "parent": 0
+    },
+    {
+        "id": 45,
+        "name": "shaka.util.Mp4BoxParsers",
+        "parent": 0
+    },
+    {
+        "id": 46,
+        "name": "shaka.dash.ContentProtection",
+        "parent": 0
+    },
+    {
+        "id": 47,
+        "name": "shaka.util.BufferUtils",
+        "parent": 0
+    },
+    {
+        "id": 48,
+        "name": "shaka.util.ManifestParserUtils",
+        "parent": 0
+    },
+    {
+        "id": 49,
+        "name": "shaka.util.Pssh",
+        "parent": 0
+    },
+    {
+        "id": 50,
+        "name": "shaka.util.StringUtils",
+        "parent": 0
+    },
+    {
+        "id": 51,
+        "name": "shaka.util.Uint8ArrayUtils",
+        "parent": 0
+    },
+    {
+        "id": 52,
+        "name": "shaka.util.XmlUtils",
+        "parent": 0
+    },
+    {
+        "id": 53,
+        "name": "shaka.dash.DashParser",
+        "parent": 0
+    },
+    {
+        "id": 54,
+        "name": "shaka.dash.MpdUtils",
+        "parent": 0
+    },
+    {
+        "id": 55,
+        "name": "shaka.dash.SegmentBase",
+        "parent": 0
+    },
+    {
+        "id": 56,
+        "name": "shaka.dash.SegmentList",
+        "parent": 0
+    },
+    {
+        "id": 57,
+        "name": "shaka.dash.SegmentTemplate",
+        "parent": 0
+    },
+    {
+        "id": 58,
+        "name": "shaka.media.ManifestParser",
+        "parent": 0
+    },
+    {
+        "id": 59,
+        "name": "shaka.media.PresentationTimeline",
+        "parent": 0
+    },
+    {
+        "id": 60,
+        "name": "shaka.media.SegmentIndex",
+        "parent": 0
+    },
+    {
+        "id": 61,
+        "name": "shaka.net.NetworkingEngine",
+        "parent": 0
+    },
+    {
+        "id": 62,
+        "name": "shaka.text.TextEngine",
+        "parent": 0
+    },
+    {
+        "id": 63,
+        "name": "shaka.util.CmcdManager",
+        "parent": 0
+    },
+    {
+        "id": 64,
+        "name": "shaka.util.LanguageUtils",
+        "parent": 0
+    },
+    {
+        "id": 65,
+        "name": "shaka.util.MimeUtils",
+        "parent": 0
+    },
+    {
+        "id": 66,
+        "name": "shaka.util.Networking",
+        "parent": 0
+    },
+    {
+        "id": 67,
+        "name": "shaka.util.OperationManager",
+        "parent": 0
+    },
+    {
+        "id": 68,
+        "name": "shaka.util.PeriodCombiner",
+        "parent": 0
+    },
+    {
+        "id": 69,
+        "name": "shaka.util.AbortableOperation",
+        "parent": 0
+    },
+    {
+        "id": 70,
+        "name": "shaka.media.InitSegmentReference",
+        "parent": 0
+    },
+    {
+        "id": 71,
+        "name": "shaka.media.Mp4SegmentIndexParser",
+        "parent": 0
+    },
+    {
+        "id": 72,
+        "name": "shaka.media.WebmSegmentIndexParser",
+        "parent": 0
+    },
+    {
+        "id": 73,
+        "name": "shaka.util.ObjectUtils",
+        "parent": 0
+    },
+    {
+        "id": 74,
+        "name": "shaka.media.SegmentReference",
+        "parent": 0
+    },
+    {
+        "id": 75,
+        "name": "shaka.dependencies",
+        "parent": 0
+    },
+    {
+        "id": 76,
+        "name": "shaka.Deprecate",
+        "parent": 0
+    },
+    {
+        "id": 77,
+        "name": "shaka.deprecate.Enforcer",
+        "parent": 0
+    },
+    {
+        "id": 78,
+        "name": "shaka.deprecate.Version",
+        "parent": 0
+    },
+    {
+        "id": 79,
+        "name": "shaka.hls.Attribute",
+        "parent": 0
+    },
+    {
+        "id": 80,
+        "name": "shaka.hls.HlsParser",
+        "parent": 0
+    },
+    {
+        "id": 81,
+        "name": "goog.Uri",
+        "parent": 0
+    },
+    {
+        "id": 82,
+        "name": "shaka.hls.ManifestTextParser",
+        "parent": 0
+    },
+    {
+        "id": 83,
+        "name": "shaka.hls.Playlist",
+        "parent": 0
+    },
+    {
+        "id": 84,
+        "name": "shaka.hls.PlaylistType",
+        "parent": 0
+    },
+    {
+        "id": 85,
+        "name": "shaka.hls.Tag",
+        "parent": 0
+    },
+    {
+        "id": 86,
+        "name": "shaka.hls.Utils",
+        "parent": 0
+    },
+    {
+        "id": 87,
+        "name": "shaka.media.DrmEngine",
+        "parent": 0
+    },
+    {
+        "id": 88,
+        "name": "shaka.media.MediaSourceEngine",
+        "parent": 0
+    },
+    {
+        "id": 89,
+        "name": "shaka.net.DataUriPlugin",
+        "parent": 0
+    },
+    {
+        "id": 90,
+        "name": "shaka.util.ArrayUtils",
+        "parent": 0
+    },
+    {
+        "id": 91,
+        "name": "shaka.hls.Segment",
+        "parent": 0
+    },
+    {
+        "id": 92,
+        "name": "shaka.util.TextParser",
+        "parent": 0
+    },
+    {
+        "id": 93,
+        "name": "shaka.media.AdaptationSet",
+        "parent": 0
+    },
+    {
+        "id": 94,
+        "name": "shaka.media.AdaptationSetCriteria",
+        "parent": 0
+    },
+    {
+        "id": 95,
+        "name": "shaka.media.BufferingObserver",
+        "parent": 0
+    },
+    {
+        "id": 96,
+        "name": "shaka.media.ClosedCaptionParser",
+        "parent": 0
+    },
+    {
+        "id": 97,
+        "name": "shaka.media.ContentWorkarounds",
+        "parent": 0
+    },
+    {
+        "id": 98,
+        "name": "shaka.util.Lazy",
+        "parent": 0
+    },
+    {
+        "id": 99,
+        "name": "shaka.media.Transmuxer",
+        "parent": 0
+    },
+    {
+        "id": 100,
+        "name": "shaka.util.Destroyer",
+        "parent": 0
+    },
+    {
+        "id": 101,
+        "name": "shaka.util.Iterables",
+        "parent": 0
+    },
+    {
+        "id": 102,
+        "name": "shaka.util.MapUtils",
+        "parent": 0
+    },
+    {
+        "id": 103,
+        "name": "shaka.media.GapJumpingController",
+        "parent": 0
+    },
+    {
+        "id": 104,
+        "name": "shaka.media.StallDetector",
+        "parent": 0
+    },
+    {
+        "id": 105,
+        "name": "shaka.media.IClosedCaptionParser",
+        "parent": 0
+    },
+    {
+        "id": 106,
+        "name": "shaka.media.PlayRateController",
+        "parent": 0
+    },
+    {
+        "id": 107,
+        "name": "shaka.media.MediaSourcePlayhead",
+        "parent": 0
+    },
+    {
+        "id": 108,
+        "name": "shaka.media.StallDetector.MediaElementImplementation",
+        "parent": 0
+    },
+    {
+        "id": 109,
+        "name": "shaka.media.VideoWrapper",
+        "parent": 0
+    },
+    {
+        "id": 110,
+        "name": "shaka.util.MediaReadyState",
+        "parent": 0
+    },
+    {
+        "id": 111,
+        "name": "shaka.media.IPlayheadObserver",
+        "parent": 0
+    },
+    {
+        "id": 112,
+        "name": "shaka.media.QualityObserver",
+        "parent": 0
+    },
+    {
+        "id": 113,
+        "name": "shaka.media.RegionObserver",
+        "parent": 0
+    },
+    {
+        "id": 114,
+        "name": "shaka.media.RegionTimeline",
+        "parent": 0
+    },
+    {
+        "id": 115,
+        "name": "shaka.media.MetaSegmentIndex",
+        "parent": 0
+    },
+    {
+        "id": 116,
+        "name": "shaka.media.StreamingEngine",
+        "parent": 0
+    },
+    {
+        "id": 117,
+        "name": "shaka.media.SegmentIterator",
+        "parent": 0
+    },
+    {
+        "id": 118,
+        "name": "shaka.net.Backoff",
+        "parent": 0
+    },
+    {
+        "id": 119,
+        "name": "shaka.util.DelayedTick",
+        "parent": 0
+    },
+    {
+        "id": 120,
+        "name": "shaka.util.EbmlElement",
+        "parent": 0
+    },
+    {
+        "id": 121,
+        "name": "shaka.util.EbmlParser",
+        "parent": 0
+    },
+    {
+        "id": 122,
+        "name": "shaka.net.HttpFetchPlugin",
+        "parent": 0
+    },
+    {
+        "id": 123,
+        "name": "shaka.net.HttpPluginUtils",
+        "parent": 0
+    },
+    {
+        "id": 124,
+        "name": "shaka.net.HttpXHRPlugin",
+        "parent": 0
+    },
+    {
+        "id": 125,
+        "name": "shaka.offline.DownloadInfo",
+        "parent": 0
+    },
+    {
+        "id": 126,
+        "name": "shaka.offline.DownloadManager",
+        "parent": 0
+    },
+    {
+        "id": 127,
+        "name": "shaka.offline.DownloadProgressEstimator",
+        "parent": 0
+    },
+    {
+        "id": 128,
+        "name": "shaka.offline.indexeddb.BaseStorageCell",
+        "parent": 0
+    },
+    {
+        "id": 129,
+        "name": "shaka.offline.indexeddb.DBConnection",
+        "parent": 0
+    },
+    {
+        "id": 130,
+        "name": "shaka.offline.indexeddb.DBOperation",
+        "parent": 0
+    },
+    {
+        "id": 131,
+        "name": "shaka.offline.indexeddb.EmeSessionStorageCell",
+        "parent": 0
+    },
+    {
+        "id": 132,
+        "name": "shaka.offline.indexeddb.StorageMechanism",
+        "parent": 0
+    },
+    {
+        "id": 133,
+        "name": "shaka.offline.StorageMuxer",
+        "parent": 0
+    },
+    {
+        "id": 134,
+        "name": "shaka.offline.indexeddb.V1StorageCell",
+        "parent": 0
+    },
+    {
+        "id": 135,
+        "name": "shaka.offline.indexeddb.V2StorageCell",
+        "parent": 0
+    },
+    {
+        "id": 136,
+        "name": "shaka.offline.indexeddb.V5StorageCell",
+        "parent": 0
+    },
+    {
+        "id": 137,
+        "name": "shaka.offline.ManifestConverter",
+        "parent": 0
+    },
+    {
+        "id": 138,
+        "name": "shaka.offline.OfflineUri",
+        "parent": 0
+    },
+    {
+        "id": 139,
+        "name": "shaka.offline.OfflineManifestParser",
+        "parent": 0
+    },
+    {
+        "id": 140,
+        "name": "shaka.offline.OfflineScheme",
+        "parent": 0
+    },
+    {
+        "id": 141,
+        "name": "shaka.offline.SessionDeleter",
+        "parent": 0
+    },
+    {
+        "id": 142,
+        "name": "shaka.offline.Storage",
+        "parent": 0
+    },
+    {
+        "id": 143,
+        "name": "shaka.offline.StoredContentUtils",
+        "parent": 0
+    },
+    {
+        "id": 144,
+        "name": "shaka.offline.StreamBandwidthEstimator",
+        "parent": 0
+    },
+    {
+        "id": 145,
+        "name": "shaka.util.ConfigUtils",
+        "parent": 0
+    },
+    {
+        "id": 146,
+        "name": "shaka.util.PlayerConfiguration",
+        "parent": 0
+    },
+    {
+        "id": 147,
+        "name": "shaka.offline.StorageCellHandle",
+        "parent": 0
+    },
+    {
+        "id": 148,
+        "name": "shaka.media.ExampleBasedCriteria",
+        "parent": 0
+    },
+    {
+        "id": 149,
+        "name": "shaka.media.Playhead",
+        "parent": 0
+    },
+    {
+        "id": 150,
+        "name": "shaka.media.PlayheadObserverManager",
+        "parent": 0
+    },
+    {
+        "id": 151,
+        "name": "shaka.media.PreferenceBasedCriteria",
+        "parent": 0
+    },
+    {
+        "id": 152,
+        "name": "shaka.media.SrcEqualsPlayhead",
+        "parent": 0
+    },
+    {
+        "id": 153,
+        "name": "shaka.routing.Walker",
+        "parent": 0
+    },
+    {
+        "id": 154,
+        "name": "shaka.text.SimpleTextDisplayer",
+        "parent": 0
+    },
+    {
+        "id": 155,
+        "name": "shaka.text.UITextDisplayer",
+        "parent": 0
+    },
+    {
+        "id": 156,
+        "name": "shaka.text.WebVttGenerator",
+        "parent": 0
+    },
+    {
+        "id": 157,
+        "name": "shaka.util.Stats",
+        "parent": 0
+    },
+    {
+        "id": 158,
+        "name": "shaka.polyfill",
+        "parent": 0
+    },
+    {
+        "id": 159,
+        "name": "shaka.polyfill.Aria",
+        "parent": 0
+    },
+    {
+        "id": 160,
+        "name": "shaka.polyfill.EncryptionScheme",
+        "parent": 0
+    },
+    {
+        "id": 161,
+        "name": "shaka.polyfill.Fullscreen",
+        "parent": 0
+    },
+    {
+        "id": 162,
+        "name": "shaka.polyfill.MediaCapabilities",
+        "parent": 0
+    },
+    {
+        "id": 163,
+        "name": "shaka.polyfill.MediaSource",
+        "parent": 0
+    },
+    {
+        "id": 164,
+        "name": "shaka.polyfill.Orientation",
+        "parent": 0
+    },
+    {
+        "id": 165,
+        "name": "shaka.polyfill.PatchedMediaKeysApple",
+        "parent": 0
+    },
+    {
+        "id": 166,
+        "name": "shaka.polyfill.PatchedMediaKeysNop",
+        "parent": 0
+    },
+    {
+        "id": 167,
+        "name": "shaka.polyfill.PatchedMediaKeysWebkit",
+        "parent": 0
+    },
+    {
+        "id": 168,
+        "name": "shaka.polyfill.PiPWebkit",
+        "parent": 0
+    },
+    {
+        "id": 169,
+        "name": "shaka.polyfill.RandomUUID",
+        "parent": 0
+    },
+    {
+        "id": 170,
+        "name": "shaka.polyfill.StorageEstimate",
+        "parent": 0
+    },
+    {
+        "id": 171,
+        "name": "shaka.polyfill.Symbol",
+        "parent": 0
+    },
+    {
+        "id": 172,
+        "name": "shaka.polyfill.VideoPlayPromise",
+        "parent": 0
+    },
+    {
+        "id": 173,
+        "name": "shaka.polyfill.VideoPlaybackQuality",
+        "parent": 0
+    },
+    {
+        "id": 174,
+        "name": "shaka.polyfill.VTTCue",
+        "parent": 0
+    },
+    {
+        "id": 175,
+        "name": "shaka.routing.Node",
+        "parent": 0
+    },
+    {
+        "id": 176,
+        "name": "shaka.routing.Payload",
+        "parent": 0
+    },
+    {
+        "id": 177,
+        "name": "shaka.text.LrcTextParser",
+        "parent": 0
+    },
+    {
+        "id": 178,
+        "name": "shaka.text.Mp4TtmlParser",
+        "parent": 0
+    },
+    {
+        "id": 179,
+        "name": "shaka.text.TtmlTextParser",
+        "parent": 0
+    },
+    {
+        "id": 180,
+        "name": "shaka.text.Mp4VttParser",
+        "parent": 0
+    },
+    {
+        "id": 181,
+        "name": "shaka.text.VttTextParser",
+        "parent": 0
+    },
+    {
+        "id": 182,
+        "name": "shaka.text.SbvTextParser",
+        "parent": 0
+    },
+    {
+        "id": 183,
+        "name": "shaka.text.SrtTextParser",
+        "parent": 0
+    },
+    {
+        "id": 184,
+        "name": "shaka.text.SsaTextParser",
+        "parent": 0
+    },
+    {
+        "id": 185,
+        "name": "shaka.text.CueRegion",
+        "parent": 0
+    },
+    {
+        "id": 186,
+        "name": "shaka.util.Dom",
+        "parent": 0
+    },
+    {
+        "id": 187,
+        "name": "shaka.util.MultiMap",
+        "parent": 0
+    },
+    {
+        "id": 188,
+        "name": "shaka.util.FairPlayUtils",
+        "parent": 0
+    },
+    {
+        "id": 189,
+        "name": "shaka.util.StateHistory",
+        "parent": 0
+    },
+    {
+        "id": 190,
+        "name": "shaka.util.SwitchHistory",
+        "parent": 0
+    }
+]
