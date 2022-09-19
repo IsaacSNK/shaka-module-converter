@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-export const openFileForWrite = (fileName) => {
+export const openFileForWrite = (fileName): fs.WriteStream => {
     return fs.createWriteStream(fileName);
 };
 

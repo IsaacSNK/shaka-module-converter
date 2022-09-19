@@ -2,20 +2,24 @@
   "name": "shaka-module-converter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --build tsconfig.json",
+    "build:watch": "tsc --build tsconfig.json --watch",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "circos": "^2.1.0",
-    "colors": "^1.4.0",
+    "colors.ts": "^1.0.12",
+    "escodegen": "^2.0.0",
     "line-reader": "^0.4.0"
   },
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "@types/node": "^18.7.18",
+    "esprima": "^4.0.1",
+    "http-server": "^14.1.1",
+    "typescript": "^4.8.3"
   }
 }

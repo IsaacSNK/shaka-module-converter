@@ -1,4 +1,6 @@
-import colors from 'colors';
+//@ts-nocheck
+
+import colors from 'colors.ts';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
