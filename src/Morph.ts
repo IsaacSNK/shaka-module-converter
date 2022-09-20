@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { ClassDeclaration, ConstructorDeclaration, Project, ScriptTarget, ts } from "ts-morph";
 import { transformClassExpression } from './transformation/TransformClassExpression';
+import { transformAttributesExpression } from './transformation/TransformClassAttributes';
 import { transformGoogProvideToNamespace } from './transformation/TransformGoogProvideToNamespace';
 
 (async () => {
@@ -11,12 +12,13 @@ import { transformGoogProvideToNamespace } from './transformation/TransformGoogP
   });
 
   const sourceFile = project.createSourceFile("../shaka-player-fork/lib/util/error.ts", 
-    fs.readFileSync('../shaka-player-fork/lib/util/error.js', 'utf8'),
-    { overwrite: true });
+  fs.readFileSync('../shaka-player-fork/lib/util/error.js', 'utf8'),
+  { overwrite: true });
+
 
   transformGoogProvideToNamespace(sourceFile);
   transformClassExpression(sourceFile);
-
+  transformAttributesExpression(sourceFile);
   // sourceFile.forEachDescendant((node) => {
   //   if (ts.isConstructorDeclaration(node.compilerNode) && ts.hasJSDocParameterTags(node.compilerNode as ts.ConstructorDeclaration)) {
   //     const jsDocs = (node as ConstructorDeclaration).getJsDocs();
