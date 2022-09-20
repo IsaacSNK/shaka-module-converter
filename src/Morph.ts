@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { Project, ScriptTarget } from "ts-morph";
+import { transformClassExpression } from './transformation/TransformClassExpression';
 import { transformGoogProvideToNamespace } from './transformation/TransformGoogProvideToNamespace';
 
 (async () => {
@@ -14,6 +15,7 @@ import { transformGoogProvideToNamespace } from './transformation/TransformGoogP
     { overwrite: true });
 
   transformGoogProvideToNamespace(sourceFile);
+  transformClassExpression(sourceFile);
 
   sourceFile.save();
 })();
