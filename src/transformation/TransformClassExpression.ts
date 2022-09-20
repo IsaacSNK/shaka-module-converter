@@ -26,6 +26,9 @@ const isClassExpression = (node: ts.Node): boolean => {
 };
 
 const createClassNode = (factory: ts.NodeFactory, node: ts.Node): ClassExpression => {
-    const originalExpression = ((node as ExpressionStatement).expression as BinaryExpression).right as ClassExpression;
-    return factory.createClassExpression([], 'Error', undefined, undefined, originalExpression.members);
+    const originalExpression = ((node as ExpressionStatement).expression as BinaryExpression);
+    const originalClassExpression = originalExpression.right as ClassExpression;
+    const className = originalExpression.left.getText();
+    const classNameParts = className.split('.');
+    return factory.createClassExpression([], classNameParts[classNameParts.length - 1], undefined, undefined, originalClassExpression.members);
 }
