@@ -8,29 +8,30 @@ const fileHeader = `/*! @license
 */`
 
 export const transformGoogProvideToNamespace = (sourceFile: SourceFile): string => {
-    const moduleName = removeGoogProvide(sourceFile);
-    if (!moduleName) {
+    const removeResult = removeGoogProvide(sourceFile);
+    if (!removeResult) {
         throw new Error('Unable to find goog.provide statement');
     }
     let sourceText = sourceFile.getFullText();
     const headerRegex = /(.*)\n(.*Shaka Player)\n(.*)\n(.*2.0)\n(.*)\*\//;
     let replaced = false;
     sourceText = sourceText.replace(headerRegex, function(token){replaced = true; return '';});
+    sourceText = sourceText.replace(new RegExp(removeResult.provideModuleName, 'g'), removeResult.className);
 
     sourceFile.removeText();
     sourceFile.addModule({
         isExported: true,
-        name: moduleName,
+        name: removeResult.namespaceName,
         statements: sourceText,    
     });
     if(replaced){
         sourceFile.insertStatements(0,fileHeader)
     }
-    return moduleName;
+    return removeResult.namespaceName;
 }
 
-const removeGoogProvide = (sourceFile: SourceFile): string | undefined => {
-    let googProvideModuleName = '';
+const removeGoogProvide = (sourceFile: SourceFile): Record<string, string> | undefined => {
+    let googProvideModuleName: Record<string, string> | undefined = undefined;
     const found = sourceFile.forEachDescendant((node: Node<ts.Node>) => {
         if (isGoogProvide(node.compilerNode)) {     
             const statement = node as ExpressionStatement;    
@@ -53,10 +54,14 @@ const isGoogProvide = (node: ts.Node): boolean => {
     return false;
 };
 
-const getGoogProvideModuleName = (node: ts.Node): string => {
+const getGoogProvideModuleName = (node: ts.Node): Record<string, string> => {
     const expressionStatement = node as ts.ExpressionStatement;
     const argumentList = (expressionStatement.expression as CallExpression).arguments;
     const moduleName = argumentList[0].getText().replace(/\'/g, '');
     const parts = moduleName.split('.');
-    return parts.slice(0, parts.length - 1).join('.');
+    return {
+        provideModuleName: moduleName,
+        namespaceName: parts.slice(0, parts.length - 1).join('.'),
+        className: parts[parts.length - 1],
+    };
 };
