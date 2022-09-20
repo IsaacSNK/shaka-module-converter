@@ -19,6 +19,7 @@ export const transformGoogProvideToNamespace = (sourceFile: SourceFile): string 
 
     sourceFile.removeText();
     sourceFile.addModule({
+        isExported: true,
         name: moduleName,
         statements: sourceText,    
     });

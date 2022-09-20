@@ -1,5 +1,5 @@
-import { Node, SourceFile } from "ts-morph";
-import ts, { BinaryExpression, ClassExpression, ExpressionStatement } from "typescript";
+import { SourceFile } from "ts-morph";
+import ts, { BinaryExpression, ClassExpression, ExpressionStatement, ExportKeyword } from "typescript";
 
 export const transformClassExpression = (sourceFile: SourceFile) => {
     sourceFile.transform(traversal => {
@@ -10,11 +10,6 @@ export const transformClassExpression = (sourceFile: SourceFile) => {
         }
         return node;
     })
-    sourceFile.forEachDescendant((node: Node<ts.Node>) => {
-        if (ts.isClassExpression(node.compilerNode)) {
-            console.log('here');
-        }
-    });
 };
 
 const isClassExpression = (node: ts.Node): boolean => {
@@ -30,5 +25,9 @@ const createClassNode = (factory: ts.NodeFactory, node: ts.Node): ClassExpressio
     const originalClassExpression = originalExpression.right as ClassExpression;
     const className = originalExpression.left.getText();
     const classNameParts = className.split('.');
-    return factory.createClassExpression([], classNameParts[classNameParts.length - 1], undefined, undefined, originalClassExpression.members);
+    return factory.createClassExpression([ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)], 
+        classNameParts[classNameParts.length - 1], 
+        undefined, 
+        undefined, 
+        originalClassExpression.members);
 }

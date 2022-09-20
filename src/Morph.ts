@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Project, ScriptTarget } from "ts-morph";
+import { ClassDeclaration, ConstructorDeclaration, Project, ScriptTarget, ts } from "ts-morph";
 import { transformClassExpression } from './transformation/TransformClassExpression';
 import { transformGoogProvideToNamespace } from './transformation/TransformGoogProvideToNamespace';
 
@@ -16,6 +16,19 @@ import { transformGoogProvideToNamespace } from './transformation/TransformGoogP
 
   transformGoogProvideToNamespace(sourceFile);
   transformClassExpression(sourceFile);
+
+  // sourceFile.forEachDescendant((node) => {
+  //   if (ts.isConstructorDeclaration(node.compilerNode) && ts.hasJSDocParameterTags(node.compilerNode as ts.ConstructorDeclaration)) {
+  //     const jsDocs = (node as ConstructorDeclaration).getJsDocs();
+  //     jsDocs.forEach((jsDoc) => {
+  //       console.log(jsDoc);
+  //     });
+  //     // node.compilerNode.parameters.forEach((param) => {
+  //     //   const jsDocs = ts.getJSDocParameterTags(param);
+  //     //   console.log(jsDocs);
+  //     // });
+  //   }
+  // })
 
   sourceFile.save();
 })();
