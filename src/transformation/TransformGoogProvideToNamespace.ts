@@ -1,17 +1,30 @@
 import ts, { CallExpression } from "typescript";
 import { SourceFile, Node, ExpressionStatement } from "ts-morph"
 
+const fileHeader = `/*! @license
+* Shaka Player
+* Copyright 2016 Google LLC
+* SPDX-License-Identifier: Apache-2.0
+*/`
+
 export const transformGoogProvideToNamespace = (sourceFile: SourceFile): string => {
     const moduleName = removeGoogProvide(sourceFile);
     if (!moduleName) {
         throw new Error('Unable to find goog.provide statement');
     }
-    const sourceText = sourceFile.getFullText();
+    let sourceText = sourceFile.getFullText();
+    const headerRegex = /(.*)\n(.*Shaka Player)\n(.*)\n(.*2.0)\n(.*)\*\//;
+    let replaced = false;
+    sourceText = sourceText.replace(headerRegex, function(token){replaced = true; return '';});
+
     sourceFile.removeText();
     sourceFile.addModule({
         name: moduleName,
         statements: sourceText,    
     });
+    if(replaced){
+        sourceFile.insertStatements(0,fileHeader)
+    }
     return moduleName;
 }
 
