@@ -1,37 +1,26 @@
-import * as Colors from 'colors.ts';
 import fs from 'fs';
-import { generateBoilerplate } from './boilerplate/Boilerplate';
-import { processFile } from './FileConverter';
+import { Project, ScriptTarget } from "ts-morph";
 import { generateFileInventory } from './FileInventory';
-import { openFile, readLine } from './io/AsyncFileReader';
-import { openFileForWrite, writeLine } from './io/FileWriter';
+import { transformAttributesExpression } from './transformation/TransformClassAttributes';
+import { transformClassExpression } from './transformation/TransformClassExpression';
+import { transformGoogProvideToNamespace } from './transformation/TransformGoogProvideToNamespace';
 
-Colors.enable();
-
-const inputPath = "../shaka-player-fork/lib/util/error.js";
-const outFilePath = "../shaka-player-fork/lib/util/error.ts";
-
-const convertFiles = (): Promise<string | void> => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const filesToProcess = await generateFileInventory(inputPath);
-            for (const file of filesToProcess) {
-                await processFile(file);
-            }
-            resolve();
-        } catch (error) {
-            reject(error);
-        }
-    });
-};
+const basePath = '../shaka-player-fork/lib/util/error.js';
 
 (async () => {
-    try {
-        // await generateBoilerplate();
-        // await convertFiles();
-        // console.log('All tasks completed'.green);
-
-    } catch (e) { 
-        console.error(`Conversion failed: ${e}`.red);
-    }
+  const project = new Project({
+    compilerOptions: {
+      target: ScriptTarget.ES2022
+    },
+  });
+  
+  // Adds the discovered files in basePath to the project
+  generateFileInventory(basePath, project);
+  project.getSourceFiles().forEach(sourceFile => {
+    transformGoogProvideToNamespace(sourceFile);
+    transformClassExpression(sourceFile);
+    transformAttributesExpression(sourceFile);
+    sourceFile.save();
+  });
 })();
+

@@ -1,13 +1,22 @@
 import fs from 'fs';
 import path from 'path';
+import { Project } from 'ts-morph';
 import { fileURLToPath } from 'url';
 
-export const generateFileInventory = (filePath) => {
+export const generateFileInventory = (filePath: string, project: Project) => {
+    let filesToAdd: string[] = [];
     if (!(fs.statSync(filePath).isDirectory())) {
-        return [filePath];
+        filesToAdd = [filePath];
     } else {
-        return getAllFilesForDir(filePath);
+        filesToAdd = getAllFilesForDir(filePath);        
     }
+    filesToAdd.forEach(file => {
+        const fileName = removeFileExtension(file);
+        const tsFile = `${fileName}.ts`;
+        const jsFile = fs.readFileSync(`${fileName}.js`, 'utf8')
+        project.createSourceFile(tsFile, jsFile, { overwrite: true });
+    });
+    return filesToAdd;
 };
 
 const getAllFilesForDir = (dirPath, arrayOfFiles: Array<string> = []): Array<string> => {
@@ -22,3 +31,7 @@ const getAllFilesForDir = (dirPath, arrayOfFiles: Array<string> = []): Array<str
     })
     return arrayOfFiles;
 };
+
+const removeFileExtension = (file: string) => {
+    return file.replace(/\.[^/.]+$/, "");
+}
