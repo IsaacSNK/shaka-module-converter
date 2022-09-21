@@ -1,14 +1,17 @@
-import { ClassDeclaration, ConstructorDeclaration, ConstructorTypeNode, Node, ParameterDeclaration, SourceFile } from "ts-morph";
+import { ClassDeclaration, ConstructorDeclaration, ConstructorTypeNode, MethodDeclaration, Node, ParameterDeclaration, SourceFile } from "ts-morph";
 import ts, {PropertyAccessExpression, SyntaxKind } from "typescript";
 
 
 export const transformAttributesExpression = (sourceFile: SourceFile) => {
 
     let classNodeList: Node[] = [];
+    let methodNodeList: Node[] = [];
     sourceFile.forEachDescendant((node: Node<ts.Node>) => {
         if (ts.isClassDeclaration(node.compilerNode)) {
             classNodeList.push(node);
-            return;
+        }
+        else if(ts.isMethodDeclaration(node.compilerNode)){
+            methodNodeList.push(node);
         }
     });
     let constructor:ConstructorDeclaration ;
@@ -22,7 +25,7 @@ export const transformAttributesExpression = (sourceFile: SourceFile) => {
                 //get constructor param types
                 jsDocs.getTags().forEach((jsDoc) => {         
                    const property = jsDoc.getStructure().text?.toString().split(' ');
-                   if(property?.length === 2){
+                   if(property!== undefined && property.length >= 2){
                     propertyTypes[property[1]] = property[0].replace(/[\{\}]/g, "").replace('...*','any');
                    }
                 });
@@ -52,12 +55,42 @@ export const transformAttributesExpression = (sourceFile: SourceFile) => {
 
       });
       //@ts-ignore
-      constructor.getParameters().forEach((parameter) => {  
-        const parameterType = propertyTypes[parameter.getName()];
-        parameter.getName(); 
-        if(parameterType!==undefined) {
-            parameter.setType(parameterType);
-        }
-     });
-
+      if(constructor !==undefined){
+        constructor.getParameters().forEach((parameter) => {  
+            const parameterType = propertyTypes[parameter.getName()];
+            parameter.getName(); 
+            if(parameterType!==undefined) {
+                parameter.setType(parameterType);
+            }
+         });
+      }
+     setParameterTypes(methodNodeList);
 };
+
+const setParameterTypes=(methodNodeList: Node<ts.Node>[]) => {
+
+    methodNodeList.forEach((method)=>{
+        const MethodDeclaration = method as MethodDeclaration;
+        const jsDocs = MethodDeclaration.getJsDocs()[0];
+        let propertyTypes = new Object();
+        jsDocs.getTags().forEach((jsDoc) => {         
+           if(jsDoc.getStructure().tagName ==='param'){
+            const property = jsDoc.getStructure().text?.toString().split(' ');
+              if(property!== undefined && property.length >= 2){
+                    propertyTypes[property[1]] = property[0].replace(/[\{\}]/g, "").replace('...*','any');
+             }
+           }
+         });
+      const methodParameters = MethodDeclaration.getParameters();
+      methodParameters.forEach((methodParam)=>{
+        const parameterType = propertyTypes[methodParam.getName()];
+            let finalParameterType:string = parameterType !== undefined? parameterType.replace('!',''): 'any';
+            if(finalParameterType.indexOf('?') == 0){
+                finalParameterType = `${finalParameterType.replace('?','')}| undefined | null `
+            }
+            methodParam.setType(finalParameterType);
+      })
+
+    })
+
+}
