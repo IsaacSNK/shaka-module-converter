@@ -26,7 +26,7 @@ export const transformAttributesExpression = (sourceFile: SourceFile) => {
                 jsDocs.getTags().forEach((jsDoc) => {         
                    const property = jsDoc.getStructure().text?.toString().split(' ');
                    if(property!== undefined && property.length >= 2){
-                    propertyTypes[property[1]] = property[0].replace(/[\{\}]/g, "").replace('...*','any');
+                    propertyTypes[property[1]] = cleanProp(property[0]);
                    }
                 });
               }
@@ -49,7 +49,7 @@ export const transformAttributesExpression = (sourceFile: SourceFile) => {
             (classNode as ClassDeclaration).insertProperty(i,{
                 isStatic: false,
                 name: propertyList[i],
-                type: parameterType!==undefined ? parameterType:'any'
+                type: cleanProp(parameterType)
               });
         }
 
@@ -73,24 +73,39 @@ const setParameterTypes=(methodNodeList: Node<ts.Node>[]) => {
         const MethodDeclaration = method as MethodDeclaration;
         const jsDocs = MethodDeclaration.getJsDocs()[0];
         let propertyTypes = new Object();
+        let returnType;
         jsDocs.getTags().forEach((jsDoc) => {         
            if(jsDoc.getStructure().tagName ==='param'){
             const property = jsDoc.getStructure().text?.toString().split(' ');
               if(property!== undefined && property.length >= 2){
-                    propertyTypes[property[1]] = property[0].replace(/[\{\}]/g, "").replace('...*','any');
+                    propertyTypes[property[1]] = cleanProp(property[0]);
              }
+           }
+           else if(jsDoc.getStructure().tagName ==='return'){
+              returnType = cleanProp(jsDoc.getStructure().text?.toString());
            }
          });
       const methodParameters = MethodDeclaration.getParameters();
+      //sets the type for each parameter if found in the js doc else set as any
       methodParameters.forEach((methodParam)=>{
         const parameterType = propertyTypes[methodParam.getName()];
-            let finalParameterType:string = parameterType !== undefined? parameterType.replace('!',''): 'any';
+            let finalParameterType:string = cleanProp(parameterType);
             if(finalParameterType.indexOf('?') == 0){
                 finalParameterType = `${finalParameterType.replace('?','')}| undefined | null `
             }
             methodParam.setType(finalParameterType);
-      })
-
+      })    
+      //set the return type   
+      returnType = formatReturnType(cleanProp(returnType));
+      MethodDeclaration.setReturnType(returnType);
     })
+}
 
+const cleanProp=(prop:string | undefined)=>{
+    let propertValue = prop !== undefined? prop.replace('!','').replace(/[\{\}]/g, "").replace('...*','any'):'any'
+    return propertValue;
+}
+
+const formatReturnType=(returnType:string )=>{
+    return returnType.replace('Promise.','Promise');
 }
