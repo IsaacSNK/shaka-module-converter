@@ -1,69 +1,36 @@
-import { ClassDeclaration, SourceFile, SyntaxKind, Node, BinaryExpression, printNode} from "ts-morph";
-import ts, { ClassExpression, ExportKeyword } from "typescript";
+import { BinaryExpression, ClassDeclaration, Node, SourceFile, SyntaxKind } from "ts-morph";
+import ts, { ClassExpression } from "typescript";
 
 export const transformClassExpression = (sourceFile: SourceFile) => {
-    // sourceFile.transform(traversal => {
-    //     const factory = traversal.factory;
-    //     const node = traversal.visitChildren(); 
-    //     if (isClassExpression(node)) {
-    //         return createClassNode(factory, node);
-    //     }
-    //     return node;
-    // })
-    const classesToConvert: BinaryExpression[] = [];
+    const classesToConvert: BinaryExpression[] = getClassesToConvert(sourceFile);
+    const nodePrinter = ts.createPrinter();
+    const classMap = new Map<string, ClassExpression>();
+    classesToConvert.forEach(binaryExpression => {
+        const newNode = createClassNode(ts.factory, binaryExpression.compilerNode);
+        classMap.set(newNode.name?.text ?? 'unknown', newNode);
+        const nodeText = nodePrinter.printNode(ts.EmitHint.Unspecified, newNode, sourceFile.compilerNode);
+        sourceFile.replaceText([binaryExpression.getStart(), binaryExpression.getEnd()], nodeText);
+    });
+    //declareStaticFields(sourceFile, classMap);
+};
 
+const getClassesToConvert = (sourceFile: SourceFile): BinaryExpression[] => {
+    const result: BinaryExpression[] = [];
     sourceFile.forEachDescendant(node => {
-        if (isClassExpressionToConvert(node)) {
+        if (isClassExpression(node)) {
             const classBinaryExpression = node.getParent();
             if (classBinaryExpression) {
-                classesToConvert.push(classBinaryExpression as BinaryExpression);
+                result.push(classBinaryExpression as BinaryExpression);
             }            
         }
     });
+    return result;
+}
 
-    classesToConvert.forEach(binaryExpression => {
-        const newNode = createClassNode(ts.factory, binaryExpression.compilerNode);
-        sourceFile.replaceText([binaryExpression.getStart(), binaryExpression.getEnd()], 
-            ts.createPrinter().printNode(ts.EmitHint.Unspecified, newNode, sourceFile.compilerNode));
-        // binaryExpression.getParent()?.transform(traversal => {
-        //     const factory = traversal.factory;
-        //     const node = traversal.visitChildren(); 
-        //     if (node.kind === SyntaxKind.BinaryExpression) {
-        //         return createClassNode(factory, node);
-        //     }
-        //     return node;
-        // });
-        // binaryExpression.replaceWithText('let a = 1 + 1;');
-        // const jsDocs = expressionStatement.getJsDocs();
-        // const newNode = binaryExpression.transform(traversal => {
-        //     return traversal.visitChildren();
-        //     // const transformed = createClassNode(traversal.factory, traversal.currentNode);
-        //     // return transformed;
-        // }) as ClassDeclaration;
-        // newNode.addJsDoc(jsDocs[0].getInnerText());
-
-        // expressionStatement.getParent().insertClass(positionFromParent, {
-        //     isExported: true,
-        //     name: 'test'
-        // });
-        // sourceFile.removeStatement(expressionStatement.pos);
-        // createClass
-        // expressionStatement.replaceWithText(expressionStatement.getFullText());
-    });
-};
-
-const isClassExpressionToConvert = (node: Node<ts.Node>): boolean => {
+const isClassExpression = (node: Node<ts.Node>): boolean => {
     return node.getKind() === SyntaxKind.ClassExpression 
             && node.getParent()?.getKind() === SyntaxKind.BinaryExpression
             && node.getParent()?.getParent()?.getKind() === SyntaxKind.ExpressionStatement
-};
-
-const isClassExpression = (node: ts.Node): boolean => {
-    if (ts.isExpressionStatement(node) && ts.isBinaryExpression(node.expression)) {
-        const binaryExpression = node.expression;
-        return ts.isClassExpression(binaryExpression.right);
-    }
-    return false;
 };
 
 const createClassNode = (factory: ts.NodeFactory, node: ts.Node): ClassExpression => {
@@ -75,4 +42,21 @@ const createClassNode = (factory: ts.NodeFactory, node: ts.Node): ClassExpressio
         undefined, 
         undefined, 
         originalClassExpression.members);
+}
+
+const declareStaticFields = (sourceFile: SourceFile, classMap: Map<string, ClassExpression>) => {
+    sourceFile.forEachChild(child => {
+        const classRefered = isStaticFieldDeclaration(child.compilerNode, classMap);
+        if (classRefered) {
+
+        }
+    });
+}
+
+const isStaticFieldDeclaration = (node: ts.Node, classMap: Map<string, ClassExpression>): ClassExpression | undefined => {
+    if (ts.isExpressionStatement(node) && ts.isBinaryExpression(node.expression) && ts.isPropertyAccessExpression(node.expression.left)) {
+        const leftSide = node.expression.left.expression as ts.PropertyAccessExpression;
+        return classMap.get(leftSide.name.getText());
+    }
+    return undefined;
 }
