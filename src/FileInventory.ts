@@ -16,7 +16,7 @@ export const generateFileInventory = (filePath: string, project: Project) => {
         const jsFile = fs.readFileSync(`${fileName}.js`, 'utf8')
         project.createSourceFile(tsFile, jsFile, { overwrite: true });
     });
-    return filesToAdd;
+    return project.getSourceFiles();
 };
 
 const getAllFilesForDir = (dirPath, arrayOfFiles: Array<string> = []): Array<string> => {

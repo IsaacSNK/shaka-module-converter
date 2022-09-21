@@ -15,8 +15,7 @@ const basePath = '../shaka-player-fork/lib/util/error.js';
   });
   
   // Adds the discovered files in basePath to the project
-  generateFileInventory(basePath, project);
-  project.getSourceFiles().forEach(sourceFile => {
+  generateFileInventory(basePath, project).forEach(sourceFile => {
     transformGoogProvideToNamespace(sourceFile);
     transformClassExpression(sourceFile);
     transformAttributesExpression(sourceFile);
