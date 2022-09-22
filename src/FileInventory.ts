@@ -12,8 +12,8 @@ export const generateFileInventory = (filePath: string, project: Project) => {
     }
     filesToAdd.forEach(file => {
         const fileName = removeFileExtension(file);
-        const tsFile = `${fileName}.ts`;
-        const jsFile = fs.readFileSync(`${fileName}.js`, 'utf8')
+        const tsFile = `${fileName}import.ts`;
+        const jsFile = fs.readFileSync(`${fileName}.ts`, 'utf8')
         project.createSourceFile(tsFile, jsFile, { overwrite: true });
     });
     return project.getSourceFiles();

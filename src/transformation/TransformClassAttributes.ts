@@ -1,11 +1,11 @@
-import { ClassDeclaration, ConstructorDeclaration, ConstructorTypeNode, MethodDeclaration, Node, ParameterDeclaration, SourceFile } from "ts-morph";
+import { ClassDeclaration, ConstructorDeclaration, ConstructorTypeNode, IfStatement, MethodDeclaration, Node, ParameterDeclaration, SourceFile } from "ts-morph";
 import ts, {PropertyAccessExpression, SyntaxKind } from "typescript";
 
 
 export const transformAttributesExpression = (sourceFile: SourceFile) => {
-
     let classNodeList: Node[] = [];
     let methodNodeList: Node[] = [];
+    let debugComments:any[][]=[];
     sourceFile.forEachDescendant((node: Node<ts.Node>) => {
         if (ts.isClassDeclaration(node.compilerNode)) {
             classNodeList.push(node);
@@ -65,6 +65,15 @@ export const transformAttributesExpression = (sourceFile: SourceFile) => {
          });
       }
      setParameterTypes(methodNodeList);
+     //remove comments
+    sourceFile.forEachDescendant((node: Node<ts.Node>) => {
+         if(ts.isIfStatement(node.compilerNode)){
+            const other = (node as unknown as  IfStatement);
+            other.remove()
+           
+        }
+    });
+
 };
 
 const setParameterTypes=(methodNodeList: Node<ts.Node>[]) => {
